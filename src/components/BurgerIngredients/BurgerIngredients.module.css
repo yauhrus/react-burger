@@ -1,6 +1,9 @@
 .root {
+  display: flex;
+  flex-direction: column;
   max-width: 600px;
   width: 100%;
+  margin-right: 40px;
 }
 
 .title {
@@ -65,4 +68,21 @@
   line-height: 24px;
   text-align: center;
   color: #F2F2F3;
+}
+
+.ingridients {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.ingridients::-webkit-scrollbar {
+	width: 12px;
+}
+.ingridients::-webkit-scrollbar-track {
+	background: #2F2F37;
+}
+.ingridients::-webkit-scrollbar-thumb {
+	background: #8585AD;
+	border: 3px solid #2F2F37;
+	border-radius: 6px;
 }

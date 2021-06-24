@@ -37,9 +37,11 @@ function BurgerIngredients() {
           )
         }
       </div>
-      { 
-        naming.map((item,index) => <BurgerIngredientsItem type={item.name} key={index}/>)
-      }
+      <div className={styles.ingridients}>
+        { 
+          naming.map((item,index) => <BurgerIngredientsItem type={item.name} key={index} title={item.title}/>)
+        }
+      </div>
     </section>
   );
 }

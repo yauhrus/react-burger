@@ -6,7 +6,7 @@ import data from '../../utils/data';
 function BurgerIngredientsItem(props: any) {
   return (
     <>
-      <h2 className={styles.sectionTitle}>Соусы</h2>
+      <h2 className={styles.sectionTitle}>{props.title}</h2>
       <ul className={styles.cardContainer}>
         {
           data.filter(item => item.type === props.type ).map(item => (
