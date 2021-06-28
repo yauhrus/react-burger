@@ -7,17 +7,22 @@
 .container {
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
-  padding-right: 10px;
+  overflow: hidden;
 }
 
-.container::-webkit-scrollbar {
+.scrollable {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.scrollable::-webkit-scrollbar {
 	width: 12px;
 }
-.container::-webkit-scrollbar-track {
+.scrollable::-webkit-scrollbar-track {
 	background: #2F2F37;
 }
-.container::-webkit-scrollbar-thumb {
+.scrollable::-webkit-scrollbar-thumb {
 	background: #8585AD;
 	border: 3px solid #2F2F37;
 	border-radius: 6px;
@@ -27,16 +32,11 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-top: 40px;
 }
 
 .totalSum {
   display: flex;
   align-items: center;
-  margin-right: 40px;
-  font-family: 'Iceland';
-  font-size: 48px;
-  line-height: 36px;
 }
 
 .totalSum svg {
@@ -47,8 +47,6 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  width: 100%;
-  margin-bottom: 16px;
 }
 
 .item:last-child {
