@@ -10,7 +10,7 @@ function BurgerIngredientsItem(props) {
       <ul className={`${styles.cardContainer} pl-4 pr-2`}>
         {
           props.data.map((item) => (
-            <li key={item._id} className={`${styles.card} mb-8`}>
+            <li key={item._id} className={`${styles.card} mb-8`} onClick={() => props.openModal(item)}>
               <img src={item.image} alt=""/>
               <span className={`${styles.price} mt-2 mb-1 text_type_digits-default`}>
                 {item.price}

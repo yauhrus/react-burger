@@ -47,6 +47,7 @@ function BurgerIngredients(props) {
                 key={item.name} 
                 title={item.title}
                 data={props.ingredients.filter((el) => el.type === item.name )}
+                openModal={props.openModal}
               />
             )
           )

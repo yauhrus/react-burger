@@ -54,7 +54,7 @@ function BurgerConstructor(props) {
           600 
           <CurrencyIcon type="primary" />
         </span>
-        <Button type="primary" size="large">
+        <Button type="primary" size="large" onClick={() => props.openModal()}>
           Оформить заказ
         </Button>
       </div>
