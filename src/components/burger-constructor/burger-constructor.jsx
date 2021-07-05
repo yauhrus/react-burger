@@ -28,7 +28,6 @@ function BurgerConstructor(props) {
                 <div className={`${styles.item} mb-4`} key={item.name}>
                   <DragIcon type="primary" />
                   <ConstructorElement
-                    type="top"
                     isLocked={false}
                     text={item.name}
                     price={item.price}
@@ -41,7 +40,7 @@ function BurgerConstructor(props) {
         </div>
         <div className={`${styles.item} mb-4 pr-8`}>
           <ConstructorElement
-            type="top"
+            type="bottom"
             isLocked={true}
             text="Краторная булка N-200i (низ)"
             price="200"
@@ -76,7 +75,7 @@ BurgerConstructor.propTypes = {
     image_mobile: PropTypes.string,
     image_large: PropTypes.string,
     __v: PropTypes.number
-  })),
+  })).isRequired,
 };
 
 export default BurgerConstructor;

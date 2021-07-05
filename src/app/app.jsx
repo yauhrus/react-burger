@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import styles from './app.module.css';
-import AppHeader from '../components/app-header/app-header';
-import BurgerIngredients from '../components/burger-ingredients/burger-ingredients';
-import BurgerConstructor from '../components/burger-constructor/burger-constructor';
-import Modal from '../components/modal/modal';
-import OrderDetails from '../components/order-details/order-details';
-import IngredientDetails from '../components/ingredient-details/ingredient-details';
+import AppHeader from '../app-header/app-header';
+import BurgerIngredients from '../burger-ingredients/burger-ingredients';
+import BurgerConstructor from '../burger-constructor/burger-constructor';
+import Modal from '../modal/modal';
+import OrderDetails from '../order-details/order-details';
+import IngredientDetails from '../ingredient-details/ingredient-details';
 
 const API = 'https://norma.nomoreparties.space/api/ingredients';
 
@@ -35,7 +35,12 @@ function App() {
   
   useEffect(() => {
     fetch(API)
-        .then(res => res.json())
+        .then(res => {
+          if (res.ok) {
+              return res.json();
+          }
+          return Promise.reject(`Ошибка ${res.status}`);
+        })
         .then(data => setApiData(data.data))
         .catch(e => {
           console.log('Error: ' + e.message);

@@ -22,8 +22,8 @@ function Modal(props) {
 
 Modal.propTypes = {
   header: PropTypes.string,
-  children: PropTypes.node,
-  onClick: PropTypes.func
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func.isRequired
 }
 
 export default Modal;
