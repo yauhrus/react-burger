@@ -47,6 +47,7 @@ function BurgerIngredients(props) {
                 key={item.name} 
                 title={item.title}
                 data={props.ingredients.filter((el) => el.type === item.name )}
+                openModal={props.openModal}
               />
             )
           )
@@ -70,7 +71,7 @@ BurgerIngredients.propTypes = {
     image_mobile: PropTypes.string,
     image_large: PropTypes.string,
     __v: PropTypes.number
-  })),
+  })).isRequired,
 };
 
 export default BurgerIngredients;
