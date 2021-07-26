@@ -97,8 +97,10 @@ function BurgerConstructor(props) {
           type="primary" 
           size="large" 
           onClick={() => { 
-            dispatch(getOrderNumber(constructorIngredients)); 
-            props.openModal();
+            if(burgerBun && constructorIngredients.length > 2) {
+              dispatch(getOrderNumber(constructorIngredients)); 
+              props.openModal();
+            }
           }}
         >
           Оформить заказ

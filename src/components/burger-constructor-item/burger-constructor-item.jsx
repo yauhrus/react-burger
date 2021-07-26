@@ -91,7 +91,7 @@ function BurgerConstructorItem(props) {
 }
 
 BurgerConstructorItem.propTypes = { 
-  item: PropTypes.arrayOf(PropTypes.shape({  
+  item: PropTypes.shape({  
     _id: PropTypes.string,
     name: PropTypes.string,
     type: PropTypes.string,
@@ -104,7 +104,7 @@ BurgerConstructorItem.propTypes = {
     image_mobile: PropTypes.string,
     image_large: PropTypes.string,
     __v: PropTypes.number
-  })).isRequired,
+  }).isRequired,
   index: PropTypes.number.isRequired
 };
 

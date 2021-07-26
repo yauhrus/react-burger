@@ -56,7 +56,12 @@ export function getOrderNumber(ingredients) {
       },
       body: JSON.stringify(data),
     })
-    .then(response => response.json())
+    .then(res => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Ошибка ${res.status}`);
+    })
     .then(data => {
       dispatch({
         type: GET_ORDER_NUMBER_SUCCESS,
