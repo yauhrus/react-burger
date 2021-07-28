@@ -1,4 +1,7 @@
 import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import styles from './app.module.css';
 import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
@@ -6,14 +9,18 @@ import BurgerConstructor from '../burger-constructor/burger-constructor';
 import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
-
-const API = 'https://norma.nomoreparties.space/api/ingredients';
+import { 
+  getIngredients,
+  SET_CURRENT_INGREDIENT,
+  DELETE_CURRENT_INGREDIENT
+} from '../../services/actions';
 
 function App() {
-  const [apiData, setApiData] = React.useState([]);
   const [orderVisible, setOrderVisible] = React.useState(false);
   const [ingredientVisible, setIngredientVisible] = React.useState(false);
-  const [currentIngredient, setCurrentIngredient] = React.useState({});
+
+  const currentIngredient = useSelector(store => store.burger.currentIngredient);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const close = (e) => {
@@ -34,18 +41,8 @@ function App() {
   },[ingredientVisible, orderVisible]);
   
   useEffect(() => {
-    fetch(API)
-        .then(res => {
-          if (res.ok) {
-              return res.json();
-          }
-          return Promise.reject(`Ошибка ${res.status}`);
-        })
-        .then(data => setApiData(data.data))
-        .catch(e => {
-          console.log('Error: ' + e.message);
-        });
-  }, []);
+    dispatch(getIngredients());
+  }, [dispatch]);
 
   const closeOrderModal = () => {
     setOrderVisible(false);
@@ -57,34 +54,42 @@ function App() {
 
   const closeIngredientModal = () => {
     setIngredientVisible(false);
+    dispatch({
+      type: DELETE_CURRENT_INGREDIENT
+    })
   }
 
   const openIngredientModal = (item) => {
-    setCurrentIngredient({...item});
+    dispatch({
+      type: SET_CURRENT_INGREDIENT,
+      currentIngredient: item
+    })
     setIngredientVisible(true);
   }
 
   return (
     <div className="App">
       <AppHeader />
-      <main className={styles.main}>
-        <BurgerIngredients ingredients={apiData} openModal={openIngredientModal}/>
-        <BurgerConstructor constructor={apiData} openModal={openOrderModal}/>
-        { orderVisible && 
-          (
-              <Modal onClick={closeOrderModal} header="">
-                <OrderDetails />
-              </Modal>
-          )
-        }
-        { ingredientVisible && 
-          (
-              <Modal onClick={closeIngredientModal} header="Детали ингредиента">
-                <IngredientDetails currentIngredient={currentIngredient}/>
-              </Modal>
-          )
-        }
-      </main>
+      <DndProvider backend={HTML5Backend}>
+        <main className={styles.main}>
+          <BurgerIngredients openModal={openIngredientModal}/>
+          <BurgerConstructor openModal={openOrderModal} />
+        </main>
+      </DndProvider>
+      { orderVisible && 
+        (
+            <Modal onClick={closeOrderModal} header="">
+              <OrderDetails />
+            </Modal>
+        )
+      }
+      { ingredientVisible && 
+        (
+            <Modal onClick={closeIngredientModal} header="Детали ингредиента">
+              <IngredientDetails currentIngredient={currentIngredient}/>
+            </Modal>
+        )
+      }
     </div>
   );
 }
