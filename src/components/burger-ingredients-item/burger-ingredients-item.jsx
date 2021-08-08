@@ -1,12 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDrag } from "react-dnd";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useLocation, Link } from 'react-router-dom';
+import { SET_CURRENT_INGREDIENT } from '../../services/actions';
 import styles from './burger-ingredients-item.module.css';
 
 function BurgerIngredientsItem(props) {
+  const location = useLocation();
   const ingredients = useSelector(store => store.burger.constructorIngredients).filter(item => item._id === props.data._id);
+  const dispatch = useDispatch();
+
+  const setCurrentIngredient = (item) => {
+    dispatch({
+      type: SET_CURRENT_INGREDIENT,
+      currentIngredient: item
+    })
+  }
 
   const [, dragRef] = useDrag({
     type: "ingredient",
@@ -16,21 +27,29 @@ function BurgerIngredientsItem(props) {
   return (
     <li 
       key={props.data._id} 
-      className={`${styles.card} mb-8`} 
-      onClick={() => props.openModal(props.data)}
+      className="mb-8" 
+      onClick={() => setCurrentIngredient(props.data)}
       ref={dragRef}
       >
-        {
-          ingredients.length > 0 && (
-            <span className={`${styles.count} text_type_digits-default`}>{ingredients.length}</span>
-          )
-        }
-        <img src={props.data.image} alt=""/>
-        <span className={`${styles.price} mt-2 mb-1 text_type_digits-default`}>
-          {props.data.price}
-          <CurrencyIcon type="primary" />
-        </span>
-        <p className={`${styles.name} text_type_main-default`}>{props.data.name}</p>
+        <Link 
+          to={{
+            pathname: `/ingredients/${props.data._id}`,
+            state: { background: location }
+          }}
+          className={styles.link}
+        >
+          {
+            ingredients.length > 0 && (
+              <span className={`${styles.count} text_type_digits-default`}>{ingredients.length}</span>
+            )
+          }
+          <img src={props.data.image} alt=""/>
+          <span className={`${styles.price} mt-2 mb-1 text_type_digits-default`}>
+            {props.data.price}
+            <CurrencyIcon type="primary" />
+          </span>
+          <p className={`${styles.name} text_type_main-default`}>{props.data.name}</p>
+        </Link>
     </li>
   );
 }
