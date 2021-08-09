@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+.header {
+  margin-top: 208px;
+}
+
 .root h4 {
   text-align: center;
 }

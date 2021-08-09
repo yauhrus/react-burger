@@ -1,23 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useDrag } from "react-dnd";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useLocation, Link } from 'react-router-dom';
-import { SET_CURRENT_INGREDIENT } from '../../services/actions';
 import styles from './burger-ingredients-item.module.css';
 
 function BurgerIngredientsItem(props) {
   const location = useLocation();
   const ingredients = useSelector(store => store.burger.constructorIngredients).filter(item => item._id === props.data._id);
-  const dispatch = useDispatch();
-
-  const setCurrentIngredient = (item) => {
-    dispatch({
-      type: SET_CURRENT_INGREDIENT,
-      currentIngredient: item
-    })
-  }
 
   const [, dragRef] = useDrag({
     type: "ingredient",
@@ -28,7 +19,6 @@ function BurgerIngredientsItem(props) {
     <li 
       key={props.data._id} 
       className="mb-8" 
-      onClick={() => setCurrentIngredient(props.data)}
       ref={dragRef}
       >
         <Link 

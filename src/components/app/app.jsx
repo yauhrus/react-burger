@@ -16,7 +16,7 @@ import Profile from '../../pages/profile/profile';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import ProtectedRoute from '../protected-route/protected-route';
-import {  getIngredients, DELETE_CURRENT_INGREDIENT } from '../../services/actions';
+import {  getIngredients } from '../../services/actions';
 
 function App() {
   const [orderVisible, setOrderVisible] = React.useState(false);
@@ -44,10 +44,7 @@ function App() {
 
   const closeIngredientModal = useCallback(() => {
     history.push('/');
-    dispatch({
-      type: DELETE_CURRENT_INGREDIENT
-    });
-  },[dispatch, history]);
+  },[history]);
 
   useEffect(() => {
     const close = (e) => {
@@ -98,6 +95,9 @@ function App() {
         <ProtectedRoute path="/profile" exact={true}>
           <Profile />
         </ProtectedRoute>
+        <Route path={"/ingredients/:ingredientId"}>
+          <IngredientDetails header="Детали ингредиента"/>
+        </Route>
       </Switch>
       { orderVisible && 
         (
