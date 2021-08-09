@@ -13,18 +13,32 @@ function AppHeader() {
   return (
     <header className={`${appStyles.header} pt-4 pb-4`}>
       <nav className={appStyles.nav}>
-        <NavLink to="/" exact={true} className={`${appStyles.button} pt-4 pr-5 pb-4 pl-5 mr-2`}>
-          <BurgerIcon type="primary" />
-          <span className={`${appStyles.button_text} ${appStyles.button_text_active} ml-2 text_type_main-default`}>Конструктор</span>
+        <NavLink 
+          to="/" 
+          exact={true} 
+          className={`${appStyles.button} pt-4 pr-5 pb-4 pl-5 mr-2`}
+          activeClassName={appStyles.button_active}
+        >
+          <BurgerIcon type="secondary" />
+          <span className={`${appStyles.button_text} ml-2 text_type_main-default`}>Конструктор</span>
         </NavLink>
-        <NavLink to="/" exact={true} className={`${appStyles.button} pt-4 pr-5 pb-4 pl-5 mr-2`}>
+        <NavLink 
+          to="/orders" 
+          exact={true} 
+          className={`${appStyles.button} pt-4 pr-5 pb-4 pl-5 mr-2`}
+          activeClassName={appStyles.button_active}
+        >
           <ListIcon type="secondary" />
           <span className={`${appStyles.button_text} ml-2 text_type_main-default`}>Лента заказов</span>
         </NavLink>
         <Link to="/" className={appStyles.logo}>
           <Logo />
         </Link>
-        <NavLink to="/profile" className={`${appStyles.button} pt-4 pr-5 pb-4 pl-5 mr-2`}>
+        <NavLink 
+          to="/profile" 
+          className={`${appStyles.button} pt-4 pr-5 pb-4 pl-5 mr-2`}
+          activeClassName={appStyles.button_active}
+        >
           <ProfileIcon type="secondary" />
           <span className={`${appStyles.button_text} ml-2 text_type_main-default`}>Личный кабинет</span>
         </NavLink>

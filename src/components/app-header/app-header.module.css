@@ -37,8 +37,12 @@
   color: #8585AD;
 }
 
-.button_text_active {
-  color: #F2F2F3;
+.button_active span{
+  color: #F2F2F3 !important;
+}
+
+.button_active path {
+  fill: #FFFFFF;
 }
 
 .logo {

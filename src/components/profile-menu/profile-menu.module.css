@@ -1,0 +1,24 @@
+.tabs {
+  display: flex;
+  flex-direction: column;
+  max-width: 320px;
+  width: 100%;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  padding: 0;
+  text-decoration: none;
+  color: #8585AD;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
+.description {
+  margin-bottom: 0;
+  color: #8585AD;
+  opacity: 0.4;
+}

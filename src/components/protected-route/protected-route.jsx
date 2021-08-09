@@ -25,7 +25,7 @@ const ProtectedRoute = ({ path, exact, children }) => {
 
 ProtectedRoute.propTypes = {
   path: PropTypes.string.isRequired,
-  exact: PropTypes.bool.isRequired,
+  exact: PropTypes.bool,
   children: PropTypes.node.isRequired
 };
 

@@ -92,7 +92,7 @@ function App() {
         <Route path="/reset-password" exact={true}>
           <ResetPassword />
         </Route>
-        <ProtectedRoute path="/profile" exact={true}>
+        <ProtectedRoute path="/profile">
           <Profile />
         </ProtectedRoute>
         <Route path={"/ingredients/:ingredientId"}>
