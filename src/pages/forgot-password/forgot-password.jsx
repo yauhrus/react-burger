@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './forgot-password.module.css';
 
-function ForgotPassword() {
+export function ForgotPassword() {
   const { isAuth } = useSelector(store => store.user);
   const history = useHistory();
   const location = useLocation();
@@ -76,5 +76,3 @@ function ForgotPassword() {
     </div>
   );
 }
-
-export default ForgotPassword;

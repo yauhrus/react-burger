@@ -5,7 +5,7 @@ import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-component
 import { loginning } from '../../services/actions/user';
 import styles from './login.module.css';
 
-function Login() {
+export function Login() {
   const dispatch = useDispatch();
   const { isAuth } = useSelector(store => store.user);
   const { state } = useLocation();
@@ -78,5 +78,3 @@ function Login() {
     </div>
   );
 };
-
-export default Login;

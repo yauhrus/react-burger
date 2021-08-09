@@ -5,7 +5,7 @@ import { Button, Input} from '@ya.praktikum/react-developer-burger-ui-components
 import styles from './registration.module.css';
 import { register } from '../../services/actions/user';
 
-function Registration() {
+export function Registration() {
   const dispatch = useDispatch();
   const { isAuth } = useSelector(store => store.user);
 
@@ -88,5 +88,3 @@ function Registration() {
     </div>
   )
 };
-
-export default Registration;

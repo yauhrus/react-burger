@@ -5,7 +5,7 @@ import styles from './profile.module.css';
 import ProfileMenu from '../../components/profile-menu/profile-menu';
 import ProfileForm from '../../components/profile-form/profile-form';
 
-function Profile() {
+export function Profile() {
   const { isAuth } = useSelector(store => store.user);
   
   if (!isAuth) {
@@ -28,5 +28,3 @@ function Profile() {
     </div>
   );
 };
-
-export default Profile;

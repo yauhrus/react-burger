@@ -3,20 +3,22 @@ import { useDispatch } from 'react-redux';
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Route, Switch, useHistory, useLocation } from 'react-router-dom';
-import styles from './app.module.css';
 import AppHeader from '../app-header/app-header';
-import BurgerIngredients from '../burger-ingredients/burger-ingredients';
-import BurgerConstructor from '../burger-constructor/burger-constructor';
 import Modal from '../modal/modal';
-import Registration from '../../pages/registration/registration';
-import Login from '../../pages/login/login';
-import ForgotPassword from '../../pages/forgot-password/forgot-password';
-import ResetPassword from '../../pages/reset-password/reset-password';
-import Profile from '../../pages/profile/profile';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import ProtectedRoute from '../protected-route/protected-route';
-import {  getIngredients } from '../../services/actions';
+import { getIngredients } from '../../services/actions';
+import { 
+  HomePage,
+  Registration, 
+  Login, 
+  ForgotPassword, 
+  ResetPassword, 
+  Profile, 
+  Orders, 
+  PageNotFound 
+} from '../../pages';
 
 function App() {
   const [orderVisible, setOrderVisible] = React.useState(false);
@@ -74,10 +76,7 @@ function App() {
       <Switch location={background || location}>
         <Route path="/" exact={true}>
           <DndProvider backend={HTML5Backend}>
-            <main className={styles.main}>
-              <BurgerIngredients />
-              <BurgerConstructor openModal={openOrderModal} />
-            </main>
+            <HomePage openModal={openOrderModal}/>
           </DndProvider>
         </Route>
         <Route path="/register" exact={true}>
@@ -95,8 +94,14 @@ function App() {
         <ProtectedRoute path="/profile">
           <Profile />
         </ProtectedRoute>
+        <Route path="/orders" exact={true}>
+          <Orders />
+        </Route>
         <Route path={"/ingredients/:ingredientId"}>
           <IngredientDetails header="Детали ингредиента"/>
+        </Route>
+        <Route>
+          <PageNotFound />
         </Route>
       </Switch>
       { orderVisible && 

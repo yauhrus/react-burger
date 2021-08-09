@@ -4,7 +4,7 @@ import { useHistory, useLocation, Link, Redirect } from 'react-router-dom';
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './reset-password.module.css';
 
-function ResetPassword() {
+export function ResetPassword() {
   const { isAuth } = useSelector(store => store.user);
   const history = useHistory();
   const location = useLocation();
@@ -93,5 +93,3 @@ function ResetPassword() {
     </div>
   );
 };
-
-export default ResetPassword;
