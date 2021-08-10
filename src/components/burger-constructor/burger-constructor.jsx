@@ -7,6 +7,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDrop } from "react-dnd";
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import styles from './burger-constructor.module.css';
 import { 
   ADD_INGREDIENT_TO_CONSTRUCTOR, 
@@ -22,6 +23,8 @@ function BurgerConstructor(props) {
   }, 0);
   const dispatch = useDispatch();
   const burgerBun = useSelector(store => store.burger.constructorIngredients).filter(item => item.type === 'bun');
+  const { isAuth } = useSelector(store => store.user);
+  const history = useHistory();
 
   const [, dropTarget] = useDrop({
     accept: "ingredient",
@@ -98,6 +101,11 @@ function BurgerConstructor(props) {
           size="large" 
           onClick={() => { 
             if(burgerBun && constructorIngredients.length > 2) {
+              if (!isAuth) {
+                history.push('/login');
+                return;
+              }
+
               dispatch(getOrderNumber(constructorIngredients)); 
               props.openModal();
             }

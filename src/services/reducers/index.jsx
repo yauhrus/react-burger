@@ -15,7 +15,6 @@ import {
 const initialState = {
   ingredients: [],
   constructorIngredients: [],
-  currentIngredient: {},
   order: {
     orderNumber: 0
   }

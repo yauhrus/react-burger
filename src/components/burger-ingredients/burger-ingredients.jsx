@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useSelector } from 'react-redux';
 import BurgerIngredientsItem from '../burger-ingredients-item/burger-ingredients-item';
@@ -85,7 +84,6 @@ function BurgerIngredients(props) {
                     type={ingredient.name} 
                     key={ingredient.name} 
                     data={ingredient}
-                    openModal={props.openModal}
                   />
                 ))
               }
@@ -98,9 +96,5 @@ function BurgerIngredients(props) {
     </section>
   );
 }
-
-BurgerIngredients.propTypes = { 
-  openModal: PropTypes.func.isRequired
-};
 
 export default BurgerIngredients;
