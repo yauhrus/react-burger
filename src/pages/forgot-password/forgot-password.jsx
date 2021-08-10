@@ -1,10 +1,13 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory, useLocation, Link, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './forgot-password.module.css';
+import { forgotPassword } from '../../services/actions/user';
 
 export function ForgotPassword() {
+  const dispatch = useDispatch();
   const { isAuth } = useSelector(store => store.user);
   const history = useHistory();
   const location = useLocation();
@@ -12,31 +15,7 @@ export function ForgotPassword() {
 
   const onEmailConfirm = (e) => {
     e.preventDefault();
-
-    fetch('https://norma.nomoreparties.space/api/password-reset', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email
-      })
-    })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка ${res.status}`);
-    })
-    .then(res => {
-      if (res.success) {
-          console.log(res);
-          history.push("/reset-password", { from: location });
-        }
-      })
-    .catch(err => {
-      return Promise.reject(`Ошибка ${err}`);
-    })
+    dispatch(forgotPassword(email, history, location));
   }
 
   if (isAuth) {

@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Button, Input } from '@ya.praktikum/react-developer-burger-ui-components';
-import { getCookie } from '../../services/cookies';
-import { getToken } from '../../services/actions/user';
+import { getUserInfo, updateUserInfo } from '../../services/actions/user';
 import styles from './profile-form.module.css';
 
 function ProfileForm() {
+  const dispatch = useDispatch();
   const [formData, setFormData] = React.useState({
     name: '',
     email: '',
@@ -18,70 +19,16 @@ function ProfileForm() {
     });
   }
 
-  const getUserInfo = () => {
-    if (!getCookie('accessToken')) {
-      getToken();
-    }
-
-    fetch('https://norma.nomoreparties.space/api/auth/user', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'authorization': getCookie('accessToken')
-      }
-    })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка ${res.status}`);
-    })
-    .then(res => {
-      if (res.success) {
-        setFormData({...formData, ...res.user});
-      }
-    })
-    .catch(err => {
-      return Promise.reject(`Ошибка ${err}`);
-    })
-  }
-
   const onSaveChanges = (e) => {
     e.preventDefault();
-
-    if (!getCookie('accessToken')) {
-      getToken();
-    }
-
-    fetch('https://norma.nomoreparties.space/api/auth/user', {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        'authorization': getCookie('accessToken')
-      },
-      body: JSON.stringify({...formData})
-    })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка ${res.status}`);
-    })
-    .then(res => {
-      if (res.success) {
-        console.log('SUCCESS');
-      }
-    })
-    .catch(err => {
-      return Promise.reject(`Ошибка ${err}`);
-    })
+    dispatch(updateUserInfo(formData));
   }
 
   useEffect(() => {
     let mounted = true;
 
     if(mounted) {
-      getUserInfo();
+      dispatch(getUserInfo(formData, setFormData));
     }
 
     return () => mounted = false;
@@ -91,7 +38,7 @@ function ProfileForm() {
 
   const onCancel = (e) => {
     e.preventDefault();
-    getUserInfo();
+    dispatch(getUserInfo(formData, setFormData));
   };
 
   return (

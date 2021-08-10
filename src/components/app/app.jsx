@@ -8,7 +8,7 @@ import Modal from '../modal/modal';
 import OrderDetails from '../order-details/order-details';
 import IngredientDetails from '../ingredient-details/ingredient-details';
 import ProtectedRoute from '../protected-route/protected-route';
-import { getIngredients } from '../../services/actions';
+import { getIngredients, CLEAR_ORDER_NUMBER } from '../../services/actions';
 import { 
   HomePage,
   Registration, 
@@ -37,6 +37,7 @@ function App() {
   }
 
   const closeOrderModal = () => {
+    dispatch({ type: CLEAR_ORDER_NUMBER });
     setOrderVisible(false);
   };
 
