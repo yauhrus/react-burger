@@ -21,7 +21,8 @@ function ProfileMenu() {
         Профиль
       </NavLink>
       <NavLink 
-        to="/profile/orders" 
+        to="/profile/orders"
+        exact={true}
         className={`${styles.link} text_type_main-medium`}
         activeStyle={{ color: "#FFFFFF" }}
       >
