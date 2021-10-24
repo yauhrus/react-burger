@@ -11,7 +11,7 @@ import {
   GET_ORDER_NUMBER_FAILED,
   CLEAR_ORDER_NUMBER,
   REPLACE_INGREDIENTS
-} from '../actions';
+} from '../constants';
 import { getIngredientsReducer } from './index';
 
 const initialState = {

@@ -4,7 +4,7 @@ import {
   WS_USER_CONNECTION_CLOSED,
   WS_USER_CONNECTION_ERROR,
   WS_USER_GET_MESSAGE
-} from '../actions/wsUser';
+} from '../constants';
 import { wsUserReducer } from './wsUser';
 
 const initialState = {
