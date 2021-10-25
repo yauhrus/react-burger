@@ -2,7 +2,7 @@ import {
   IS_REQUESTING,
   IS_FAILED,
   IS_SUCCESSFUL,
-} from '../actions/user';
+} from '../constants';
 import { userReducer } from './user';
 
 const initialState = {
